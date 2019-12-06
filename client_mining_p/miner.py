@@ -106,6 +106,17 @@ if __name__ == '__main__':
             "id": id
         }
 
+        print(f"\nMaking transaction")
+        # sender, recipient, amount
+        transaction = {
+            "sender": "sender??",
+            "recipient": id,
+            "amount": 1
+        }
+        res = requests.post(url=node + "/transactions/new", json=transaction)
+        index = res.json()[0]["index"]
+        print(f"Result index: {index}")
+
         r = requests.post(url=node + "/mine", json=post_data)
         data = r.json()[0]
         # print(f"\n\nData: {data['message']}\n\n")

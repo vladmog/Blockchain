@@ -8,7 +8,7 @@ that adds a new transaction to the list of transactions:
 
 Modify the `mine` endpoint to create a reward via a `new_transaction`
 for mining a block:
-
+ 
     * The sender is "0" to signify that this node created a new coin
     * The recipient is the id of the miner
     * The amount is 1 coin as a reward for mining the next block
@@ -21,3 +21,4 @@ Create an endpoint at `/transactions/new` that accepts a json `POST`:
     * upon success, return a 'message' indicating index of the block
       containing the transaction
 
+    

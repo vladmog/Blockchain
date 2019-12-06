@@ -1,3 +1,6 @@
+# Paste your version of blockchain.py from the client_mining_p
+# folder here
+
 # Paste your version of blockchain.py from the basic_block_gp
 # folder here
 import hashlib
@@ -146,7 +149,9 @@ def mine():
         is_valid = blockchain.valid_proof(block_string, proof)
 
         if is_valid is True:
-            blockchain.new_block(proof, last_block['previous_hash'])
+            block_string = json.dumps(last_block, sort_keys=True).encode()
+            new_prevHash = hashlib.sha256(block_string).hexdigest()
+            blockchain.new_block(proof, new_prevHash)
             response = {
                 "message": "New Block Forged"
             }
