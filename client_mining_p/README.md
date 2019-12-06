@@ -24,14 +24,14 @@ Modify the server we created to:
 
 *Client Mining*
 Create a client application that will:
-* Get the last block from the server
-* Run the `proof_of_work` function until a valid proof is found, validating or rejecting each attempt.  Use a copy of `valid_proof` to assist.
-* Print messages indicating that this has started and finished.
-* Modify it to generate proofs with *6* leading zeroes.
-* Print a message indicating the success or failure response from the server
-* Add any coins granted to a simple integer total, and print the amount of coins the client has earned
-* Continue mining until the app is interrupted.
-* Change the name in `my_id.txt` to your name
+<!-- * Get the last block from the server -->
+<!-- * Run the `proof_of_work` function until a valid proof is found, validating or rejecting each attempt.  Use a copy of `valid_proof` to assist. -->
+<!-- * Print messages indicating that this has started and finished. -->
+<!-- * Modify it to generate proofs with *6* leading zeroes. -->
+<!-- * Print a message indicating the success or failure response from the server -->
+<!-- * Add any coins granted to a simple integer total, and print the amount of coins the client has earned -->
+<!-- * Continue mining until the app is interrupted. -->
+<!-- * Change the name in `my_id.txt` to your name -->
 * (Stretch) Handle non-json responses sent by the server in the event of an error, without crashing the miner
 * Stretch: Add a timer to keep track of how long it takes to find a proof
 

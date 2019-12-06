@@ -116,7 +116,7 @@ class Blockchain(object):
         guess = f'{block_string}{proof}'.encode()
         guess_hash = hashlib.sha256(guess).hexdigest()
 
-        print(proof)
+        print(guess_hash)
 
         return guess_hash[:DIFFICULTY] == "0" * DIFFICULTY
 
@@ -134,27 +134,21 @@ blockchain = Blockchain()
 @app.route('/mine', methods=['POST'])
 def mine():
     data = request.get_json()
-    is_mined = False
+    print(f"\n\nData: {data}")
 
     if "proof" in data and "id" in data:
         # Est variables
-        proof = data.proof
-        id = data.id
+        proof = data['proof']
         last_block = blockchain.chain[len(blockchain.chain)-1]
-        block_string = last_block.hash
+        block_string = json.dumps(last_block, sort_keys=True)
 
         # Run check
-        result = blockchain.valid_proof(block_string, proof)
+        is_valid = blockchain.valid_proof(block_string, proof)
 
-        # Conditional Action
-        if is_mined:
+        if is_valid is True:
+            blockchain.new_block(proof, last_block['previous_hash'])
             response = {
-                "message": "Block already mined!"
-            }
-            return jsonify(response, 400)
-        if result is True:
-            response = {
-                "message": "You mined the block!"
+                "message": "New Block Forged"
             }
             return jsonify(response, 200)
         else:
@@ -197,9 +191,13 @@ def full_chain():
 @app.route('/last_block', methods=['GET'])
 def last_block():
 
-    response = blockchain.chain[len(blockchain.chain)-1]
+    response = {
+        "last_block": blockchain.chain[len(blockchain.chain)-1]
+    }
     if len(blockchain.chain) == 0:
-        response = "Empty chain"
+        response = {
+            "message": "Empty chain"
+        }
 
     return jsonify(response), 200
 
